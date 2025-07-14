@@ -10,8 +10,8 @@ A modular repo for inference‑time chain‑of‑thought pruning using hidden‑
 my-cot-prune/
 ├── .gitignore
 ├── requirements.txt        # Python dependencies
+├── load_gsm8k.py      # Download & dump GSM8K to JSONL
 ├── scripts/
-│   ├── load_gsm8k.py      # (Optional) Download & dump GSM8K to JSONL
 │   ├── extract_hidden.py  # Stage 1: extract hidden states
 │   ├── build_steer_vec.py # Stage 2: compute steering vectors
 │   └── run_inference.py   # Stage 3: pruned CoT generation
@@ -58,7 +58,7 @@ my-cot-prune/
 By default, raw GSM8K data is **not** tracked in Git. You can generate it locally:
 
 ```bash
-python3 scripts/load_gsm8k.py
+python3 load_gsm8k.py
 ```
 
 This writes `data/raw_problems.jsonl` (the GSM8K training split) into `data/`.
