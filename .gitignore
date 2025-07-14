@@ -1,1 +1,4 @@
 .DS_Store
+/data/*.jsonl
+testing/vincent/data/raw_problems.jsonl
+
