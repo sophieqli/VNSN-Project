@@ -2,3 +2,4 @@
 /data/*.jsonl
 testing/vincent/data/raw_problems.jsonl
 
+.DS_Store
