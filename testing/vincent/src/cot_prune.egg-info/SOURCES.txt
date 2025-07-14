@@ -1,0 +1,5 @@
+setup.py
+src/cot_prune.egg-info/PKG-INFO
+src/cot_prune.egg-info/SOURCES.txt
+src/cot_prune.egg-info/dependency_links.txt
+src/cot_prune.egg-info/top_level.txt
