@@ -1,5 +1,4 @@
 torch
 transformers
-datasets
 tqdm
 scikit-learn

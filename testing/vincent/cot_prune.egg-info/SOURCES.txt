@@ -1,0 +1,8 @@
+README.md
+setup.py
+cot_prune.egg-info/PKG-INFO
+cot_prune.egg-info/SOURCES.txt
+cot_prune.egg-info/dependency_links.txt
+cot_prune.egg-info/entry_points.txt
+cot_prune.egg-info/requires.txt
+cot_prune.egg-info/top_level.txt

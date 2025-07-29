@@ -3,3 +3,13 @@
 testing/vincent/data/raw_problems.jsonl
 
 .DS_Store
+temp.txt
+
+/data
+.venv/
+venv/
+data/hidden/
+data/vectors/
+testing/vincent/data/
+testing/vincent/data/hidden/
+testing/vincent/data/vectors/

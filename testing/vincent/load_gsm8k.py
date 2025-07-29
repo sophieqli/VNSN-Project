@@ -6,13 +6,11 @@ ds = load_dataset("gsm8k", "main")["train"]
 
 with open("data/raw_problems.jsonl", "w") as f:
     for ex in ds:
-        # ex is a dict with keys like "question", "answer", etc.
-        # adapt to whatever your extract script expects 
         f.write(json.dumps({
             "prompt": ex["question"],
             "problem": ex["question"],
-            "model_generation": [ex["answer"]],  # or however you wrap it
-            "all_eval": [True],                  # dummy label
+            "model_generation": [ex["answer"]],
+            "all_eval": [True], 
             "level": "unknown",
             "answer": ex["answer"]
         }) + "\n")
