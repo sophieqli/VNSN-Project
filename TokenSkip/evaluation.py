@@ -1,6 +1,7 @@
 import os
 import json
 import torch
+import torch.nn.functional as F
 import random
 import argparse
 import numpy as np
@@ -16,6 +17,8 @@ from eval.utils import generate_completions
 from data_processing.process_utils import *
 from data_processing.answer_extraction import *
 from eval.eval_script import *
+from drift_scorer import DriftScorer
+from custom_gen import custom_gen_pruning
 
 def set_random_seed(seed):
     random.seed(seed)
@@ -74,13 +77,17 @@ def infer(args, test_data, answer_extraction_fn):
             
         eos_token = tokenizer.eos_token if tokenizer is not None and tokenizer.eos_token is not None else '</s>'
         stop_words = [eos_token]
-        
+
+        input_ids = tokenizer(prompts, return_tensors="pt").input_ids.cuda()
+        scorer = DriftScorer()
+
         torch.cuda.synchronize()
         start_time = time()
-        if args.use_adapter:
-            outputs = model.generate(prompts, SamplingParams(temperature=args.temperature, top_p=1.0, max_tokens=args.max_new_tokens, n=1, stop=stop_words), lora_request=LoRARequest("sql_adapter", 1, args.adapter_path))
-        else:
-            outputs = model.generate(prompts, SamplingParams(temperature=args.temperature, top_p=1.0, max_tokens=args.max_new_tokens, n=1, stop=stop_words))
+        # if args.use_adapter:
+        #     outputs = model.generate(prompts, SamplingParams(temperature=args.temperature, top_p=1.0, max_tokens=args.max_new_tokens, n=1, stop=stop_words), lora_request=LoRARequest("sql_adapter", 1, args.adapter_path))
+        # else:
+        #     outputs = model.generate(prompts, SamplingParams(temperature=args.temperature, top_p=1.0, max_tokens=args.max_new_tokens, n=1, stop=stop_words))
+        outputs = custom_gen_pruning(model, tokenizer, input_ids, scorer, args.max_new_tokens, 5)
         torch.cuda.synchronize()
         total_time = time() - start_time
         
