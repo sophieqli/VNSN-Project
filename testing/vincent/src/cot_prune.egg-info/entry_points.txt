@@ -1,0 +1,4 @@
+[console_scripts]
+build-steer = cot_prune.cli:main_build
+extract-hidden = cot_prune.cli:main_extract
+prune-gen = cot_prune.cli:main_prune
